@@ -7,23 +7,42 @@ import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 
+import {app} from '../firebase';
+import { getFirestore } from "firebase/firestore";
+import { collection, getDocs } from "firebase/firestore";
+import { useEffect, useState } from 'react';
+
+// conexão com o banco de dados
+const db = getFirestore(app);
+
 export default function Listar()
 {
+    const [imoveis, setImoveis] = useState([]);
 
-    const imoveis = [
+    useEffect(() =>{
+
+        let ignore = false;
+        async function carregar()
         {
-            codigo: "AP2022",
-            valor: 200450.00,
-            data_cadastro: new Date(),
-            endereco: "Rua das Camelias, 123"
-        },
-        {
-            codigo: "LJ123",
-            valor: 120000.00,
-            data_cadastro: new Date(),
-            endereco: "Av dos peixes, 1022"
+            const resultado = await getDocs(collection(db, "imoveis"));
+            const novo = resultado.docs.map(function(item){
+                return item.data();
+            });
+            
+            if(imoveis.length == 0)
+            {
+                setImoveis(novo);
+                console.log(novo);
+            }
         }
-    ];
+
+        carregar();
+        
+        return () =>
+        {
+            ignore = true;
+        }
+    });
 
     return (
         <Grid container spacing={3}>
@@ -50,10 +69,10 @@ export default function Listar()
                         <TableBody>
                             {imoveis.map(function(item){
                                 return (
-                                <TableRow>
+                                <TableRow key={item.codigo}>
                                 <TableCell>{item.codigo}</TableCell>
                                 <TableCell>{item.endereco}</TableCell>
-                                <TableCell>{item.valor.toLocaleString("pt-BR", {style: "currency", currency: "BRL"})}</TableCell>
+                                <TableCell>{item.valor_imovel}</TableCell>
                                 <TableCell>{item.data_cadastro.toLocaleString()}</TableCell>
                             </TableRow>
                                 )
