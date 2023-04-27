@@ -1,6 +1,7 @@
 import {Grid, Paper, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Button, IconButton} from '@mui/material';
 
 import DeleteIcon from '@mui/icons-material/Delete';
+import EditIcon from '@mui/icons-material/Edit';
 
 import Confirmar from './Confirmar';
 
@@ -63,6 +64,7 @@ export default function Listar()
         setImoveis([]);
         carregar();
         setConfirmar(null);
+        setIdSelecionado(null);
     }
 
     // executa na próxima atualização
@@ -107,9 +109,8 @@ export default function Listar()
                                     <TableCell>{ item.valor_imovel.toLocaleString("pt-BR", {style: "currency", currency: "BRL"}) }</TableCell>
                                     <TableCell>{ item.data_cadastro.toDate().toLocaleString() }</TableCell>
                                     <TableCell>
-                                        <IconButton onClick={ () => { deletar(item.id)}}>
-                                            <DeleteIcon />
-                                        </IconButton>
+                                        <IconButton onClick={ () => { deletar(item.id)}}> <DeleteIcon /> </IconButton>
+                                        <IconButton href='/imoveis/editar/abc123'><EditIcon /></IconButton>
                                     </TableCell>
                                 </TableRow>
                                 )
