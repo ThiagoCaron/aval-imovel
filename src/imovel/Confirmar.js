@@ -2,6 +2,18 @@ import { Button, Dialog, DialogActions, DialogContent, DialogContentText, Dialog
 
 export default function Confirmar(props)
 {
+    function cancelar()
+    {
+        props.modificador(false);
+        props.retorno(false);
+    }
+
+    function confirmar()
+    {
+        props.modificador(false);
+        props.retorno(true);
+    }
+    
     return (
         <Dialog open={props.abrir}>
             <DialogTitle>Confirmar ação</DialogTitle>
@@ -12,8 +24,8 @@ export default function Confirmar(props)
             </DialogContent>
 
             <DialogActions>
-                <Button>Cancelar</Button>
-                <Button>Confirmar</Button>
+                <Button onClick={cancelar}>Cancelar</Button>
+                <Button onClick={confirmar}>Confirmar</Button>
             </DialogActions>
         </Dialog>
     );

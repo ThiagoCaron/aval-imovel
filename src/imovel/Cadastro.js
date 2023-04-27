@@ -1,8 +1,8 @@
-import { Grid, Paper, TextField, MenuItem, Button, Box } from "@mui/material";
-import { useState } from "react";
+import { Grid, Paper, TextField, MenuItem, Button, Box } from '@mui/material';
+import { useState } from 'react';
 
 import {app} from '../firebase';
-import { getFirestore, doc, setDoc, collection } from "firebase/firestore";
+import { getFirestore, doc, setDoc, collection } from 'firebase/firestore';
 
 import {redirect} from "react-router-dom";
 
@@ -74,5 +74,5 @@ export default function Cadastro()
             </Grid>
             
         </Grid>
-    );
+    )
 }
