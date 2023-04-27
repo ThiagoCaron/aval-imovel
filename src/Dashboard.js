@@ -19,8 +19,29 @@ import Copyright from './dashboard/Copyright';
 import {drawerWidth, AppBar, Drawer, mdTheme} from './dashboard/estilos';
 
 import Home from './dashboard/Home';
-import Cadastro from './imovel/Cadastro';
+import CadastroImovel from './imovel/Cadastro';
 import ListarImovel from './imovel/Listar';
+
+import ReactDOM from "react-dom/client";
+import {
+  createBrowserRouter,
+  RouterProvider,
+} from "react-router-dom";
+
+const paginas = createBrowserRouter([
+  {
+    path: "/",
+    element: <Home />
+  },
+  {
+    path: "/imoveis",
+    element: <ListarImovel />
+  },
+  {
+    path: "/imoveis/cadastro",
+    element: <CadastroImovel />
+  }
+]);
 
 
 function DashboardContent(atributos) 
@@ -102,7 +123,9 @@ function DashboardContent(atributos)
         >
           <Toolbar />
           <Container maxWidth="lg" sx={{ mt: 4, mb: 4 }}>
-            {atributos.pagina}
+
+            <RouterProvider router={paginas} />
+
             <Copyright sx={{ pt: 4 }} />
           </Container>
         </Box>
@@ -114,12 +137,5 @@ function DashboardContent(atributos)
 export default function Dashboard() 
 {
   //Router 
-  if(window.location.pathname == '/imovel')
-  {
-
-    return <DashboardContent pagina={<ListarImovel />} />;
-  }else
-  {
-    return <DashboardContent pagina={<Home />} />;
-  }
+    return <DashboardContent />;
 }

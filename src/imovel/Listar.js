@@ -11,6 +11,7 @@ import {app} from '../firebase';
 import { getFirestore } from "firebase/firestore";
 import { collection, getDocs } from "firebase/firestore";
 import { useEffect, useState } from 'react';
+import { Button } from '@mui/material';
 
 // conexão com o banco de dados
 const db = getFirestore(app);
@@ -46,6 +47,9 @@ export default function Listar()
 
     return (
         <Grid container spacing={3}>
+            <Grid item>
+                <Button href="/imoveis/cadastro" variant="contained">Cadastrar Imovel</Button>
+            </Grid>
             <Grid item xs={12} md={12} lg={12}>
             <Paper
                   sx={{
@@ -72,8 +76,8 @@ export default function Listar()
                                 <TableRow key={item.codigo}>
                                 <TableCell>{item.codigo}</TableCell>
                                 <TableCell>{item.endereco}</TableCell>
-                                <TableCell>{item.valor_imovel}</TableCell>
-                                <TableCell>{item.data_cadastro.toLocaleString()}</TableCell>
+                                <TableCell>{item.valor_imovel.toLocaleString("pt-BR", {style: "currency", currency: "BRL"})}</TableCell>
+                                <TableCell>{item.data_cadastro.toDate().toLocaleString()}</TableCell>
                             </TableRow>
                                 )
                             })
