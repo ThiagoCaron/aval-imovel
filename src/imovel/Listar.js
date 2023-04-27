@@ -1,4 +1,8 @@
-import {Grid, Paper, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Button} from '@mui/material';
+import {Grid, Paper, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Button, IconButton} from '@mui/material';
+
+import DeleteIcon from '@mui/icons-material/Delete';
+
+import Confirmar from './Confirmar';
 
 
 import {app} from '../firebase';
@@ -12,6 +16,7 @@ const db = getFirestore(app);
 export default function Listar()
 {
     const [imoveis, setImoveis] = useState([]);
+    const [dialogo, setDialogo] = useState(false);
 
     useEffect(() =>{
 
@@ -38,6 +43,11 @@ export default function Listar()
         }
     });
 
+    function deletar()
+    {
+        setDialogo(true);
+    }
+
     return (
         <Grid container spacing={3}>
             <Grid item>
@@ -52,6 +62,8 @@ export default function Listar()
                   }}
                 >
 
+                    <Confirmar abrir={dialogo} texto="Deseja realmente deletar esse imóvel?" />
+
                     <Table>
                         <TableHead>
                             <TableRow>
@@ -59,6 +71,7 @@ export default function Listar()
                                 <TableCell>Endereço</TableCell>
                                 <TableCell>Valor</TableCell>
                                 <TableCell>Data de Cadastro</TableCell>
+                                <TableCell>Ações</TableCell>
                             </TableRow>
                         </TableHead>
 
@@ -70,11 +83,15 @@ export default function Listar()
                                 <TableCell>{item.endereco}</TableCell>
                                 <TableCell>{item.valor_imovel.toLocaleString("pt-BR", {style: "currency", currency: "BRL"})}</TableCell>
                                 <TableCell>{item.data_cadastro.toDate().toLocaleString()}</TableCell>
+                                <TableCell>
+                                    <IconButton onClick={deletar}>
+                                        <DeleteIcon />
+                                    </IconButton>
+                                </TableCell>
                             </TableRow>
                                 )
                             })
                             }
-                            
                         </TableBody>
                     </Table>
             </Paper>
