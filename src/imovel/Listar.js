@@ -1,4 +1,5 @@
-import {Grid, Paper, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Button, IconButton} from '@mui/material';
+import {Grid, Paper, Table, TableBody, TableContainer, TableHead, TableRow, Button, IconButton} from '@mui/material';
+import TableCell from '@mui/material/TableCell';
 
 import DeleteIcon from '@mui/icons-material/Delete';
 import EditIcon from '@mui/icons-material/Edit';

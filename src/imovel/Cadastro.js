@@ -1,10 +1,15 @@
-import { Grid, Paper, TextField, MenuItem, Button, Box } from '@mui/material';
+import Grid from '@mui/material/Grid';
+import Paper from '@mui/material/Paper';
+import TextField from '@mui/material/TextField'
+import MenuItem from '@mui/material/MenuItem'
+import { Button } from '@mui/material';
+import Box from '@mui/material/Box'
 import { useState } from 'react';
 
 import {app} from '../firebase';
-import { getFirestore, doc, setDoc, collection } from 'firebase/firestore';
+import { getFirestore } from "firebase/firestore";
+import { doc, setDoc, collection } from "firebase/firestore";
 
-import {redirect} from "react-router-dom";
 
 // conexão com o banco de dados
 const db = getFirestore(app);
@@ -17,9 +22,9 @@ export default function Cadastro()
     async function cadastrar(evento)
     {
         evento.preventDefault();
-        setCarregando(true);
+        setCarregando(true)
 
-        const novo = doc(collection(db, "imoveis"));
+        const novo = doc(collection(db, "imoveis"))
         novoImovel.data_cadastro = new Date();
         novoImovel.valor_imovel = parseFloat(novoImovel.valor_imovel);
         const resultado = await setDoc(novo, novoImovel);
@@ -49,23 +54,23 @@ export default function Cadastro()
                 <Box 
                     component="form"
                     sx={{
-                        '& .MuiTextField-root': { m: 2, width: '55ch' },
+                        '& > :not(style)': { m: 2, width: '55ch' },
                       }}
                       onSubmit={cadastrar}
                     >
-                    <TextField onChance={alteraImovel} label="Código" margin="normal" name="codigo" />
-                    <TextField onChance={alteraImovel} label="Descrição" multiline rows={4} margin="normal" name="descricao" />
-                    <TextField onChance={alteraImovel} label="Endereço" margin="normal" name="endereco" />
-                    <TextField onChance={alteraImovel} label="Quartos" margin="normal" name="quartos" />
-                    <TextField onChance={alteraImovel} label="Tipo" margin="normal" name="tipo" select >
-                    <MenuItem value="Ap">Apartamento</MenuItem>
-                    <MenuItem value="Sb">Sobrado</MenuItem>
-                    <MenuItem value="Lj">Loja</MenuItem>
-                    <MenuItem value="Cs">Casa</MenuItem>
+                    <TextField onChange={alteraImovel} label="Código" margin="normal" name="codigo" />
+                    <TextField onChange={alteraImovel} label="Descrição" multiline rows={4} margin="normal" name="descricao" />
+                    <TextField onChange={alteraImovel} label="Endereço" margin="normal" name="endereco" />
+                    <TextField onChange={alteraImovel} label="Quartos" margin="normal" name="quartos" />
+                    <TextField onChange={alteraImovel} label="Tipo" margin="normal" name="tipo" select >
+                    <MenuItem value="AP">Apartamento</MenuItem>
+                    <MenuItem value="SB">Sobrado</MenuItem>
+                    <MenuItem value="LJ">Loja</MenuItem>
+                    <MenuItem value="CS">Casa</MenuItem>
                     </TextField>
-                    <TextField onChance={alteraImovel} label="Valor do imóvel" margin="normal" name="valor_imovel" />
-                    <TextField onChance={alteraImovel} label="Geolocalização" margin="normal" name="geolozalizacao" />
-                    <TextField onChance={alteraImovel} label="Extras" margin="normal" name="extras" />
+                    <TextField onChange={alteraImovel} label="Valor do imóvel" margin="normal" name="valor_imovel" />
+                    <TextField onChange={alteraImovel} label="Geolocalização" margin="normal" name="geolozalizacao" />
+                    <TextField onChange={alteraImovel} label="Extras" margin="normal" name="extras" />
                     {(carregando == true) ? <Button disabled variant="contained">Enviando</Button> : 
                         <Button type="submit" variant="contained">Cadastrar</Button>
                     }
