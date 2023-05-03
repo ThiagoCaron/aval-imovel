@@ -125,7 +125,7 @@ export default function Dashboard()
     //Router 
       return <DashboardContent />;
   } else {
-    return <Login />
+    return <Login status={setLogado} />
   }
 
 }
