@@ -18,7 +18,7 @@ import { mainListItems, secondaryListItems } from './dashboard/ListItems';
 import Copyright from './dashboard/Copyright';
 import {drawerWidth, AppBar, Drawer, mdTheme} from './dashboard/estilos';
 
-
+import Login from './Login';
 
 import ReactDOM from "react-dom/client";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
@@ -117,6 +117,15 @@ function DashboardContent(atributos)
 
 export default function Dashboard() 
 {
-  //Router 
-    return <DashboardContent />;
+
+  const [logado, setLogado] = React.useState(false);
+
+  if(logado === true)
+  {
+    //Router 
+      return <DashboardContent />;
+  } else {
+    return <Login />
+  }
+
 }
