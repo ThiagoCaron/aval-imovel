@@ -13,6 +13,7 @@ import Container from '@mui/material/Container';
 import MenuIcon from '@mui/icons-material/Menu';
 import ChevronLeftIcon from '@mui/icons-material/ChevronLeft';
 import NotificationsIcon from '@mui/icons-material/Notifications';
+import LogoutIcon from '@mui/icons-material/Logout';
 
 import { mainListItems, secondaryListItems } from './dashboard/ListItems';
 import Copyright from './dashboard/Copyright';
@@ -63,10 +64,8 @@ function DashboardContent(atributos)
             >
               Sistema de avaliação de imóvel
             </Typography>
-            <IconButton color="inherit">
-              <Badge badgeContent={4} color="secondary">
-                <NotificationsIcon />
-              </Badge>
+            <IconButton onClick={Sair} color="inherit">
+                <LogoutIcon />
             </IconButton>
           </Toolbar>
         </AppBar>
@@ -115,12 +114,20 @@ function DashboardContent(atributos)
   );
 }
 
+function Sair()
+{
+  //const teste = window.sessionStorage.setItem('logado', false);
+  window.sessionStorage.clear();
+  window.location.pathname = "/";
+}
+
 export default function Dashboard() 
 {
 
-  const [logado, setLogado] = React.useState(false);
+  const session = window.sessionStorage.getItem('logado');
+  const [logado, setLogado] = React.useState(session);
 
-  if(logado === true)
+  if(logado == 'true')
   {
     //Router 
       return <DashboardContent />;

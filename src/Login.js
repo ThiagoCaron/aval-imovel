@@ -31,7 +31,8 @@ export default function Login(props)
         try{
             const auth = getAuth(app);
             const resposta = await signInWithEmailAndPassword(auth, email, senha);
-            props.status(true);
+            props.status('true');
+            window.sessionStorage.setItem("logado", true);
         }catch (erro)
         {
             const tipoErro = erro.code;
