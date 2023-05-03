@@ -1,9 +1,9 @@
 import Grid from '@mui/material/Grid';
 import Paper from '@mui/material/Paper';
-import TextField from '@mui/material/TextField'
-import MenuItem from '@mui/material/MenuItem'
+import TextField from '@mui/material/TextField';
+import MenuItem from '@mui/material/MenuItem';
 import { Button } from '@mui/material';
-import Box from '@mui/material/Box'
+import Box from '@mui/material/Box';
 import { useState } from 'react';
 
 import {app} from '../firebase';
@@ -71,7 +71,7 @@ export default function Cadastro()
                     <TextField onChange={alteraImovel} label="Valor do imóvel" margin="normal" name="valor_imovel" />
                     <TextField onChange={alteraImovel} label="Geolocalização" margin="normal" name="geolozalizacao" />
                     <TextField onChange={alteraImovel} label="Extras" margin="normal" name="extras" />
-                    {(carregando == true) ? <Button disabled variant="contained">Enviando</Button> : 
+                    {(carregando === true) ? <Button disabled variant="contained">Enviando</Button> : 
                         <Button type="submit" variant="contained">Cadastrar</Button>
                     }
                 </Box>

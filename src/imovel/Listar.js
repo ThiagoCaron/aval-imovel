@@ -1,4 +1,4 @@
-import {Grid, Paper, Table, TableBody, TableContainer, TableHead, TableRow, Button, IconButton} from '@mui/material';
+import {Grid, Paper, Table, TableBody, TableHead, TableRow, Button, IconButton} from '@mui/material';
 import TableCell from '@mui/material/TableCell';
 
 import DeleteIcon from '@mui/icons-material/Delete';
@@ -33,7 +33,7 @@ export default function Listar()
 
         });
         
-        if(imoveis.length == 0)
+        if(imoveis.length === 0)
         {
             setImoveis(novo);
         }
@@ -50,7 +50,7 @@ export default function Listar()
         {
             ignore = true;
         }
-    }, [imoveis]);
+    });
 
     function deletar(id)
     {
@@ -69,7 +69,7 @@ export default function Listar()
     }
 
     // executa na próxima atualização
-    if(confirmar == true)
+    if(confirmar === true)
     {
         removerFirebase(idSelecionado);
     }
@@ -103,6 +103,7 @@ export default function Listar()
 
                         <TableBody>
                             {imoveis.map(function(item){
+                                const link = '/imoveis/editar/' + item.id;
                                 return (
                                 <TableRow key={ item.codigo }>
                                     <TableCell>{ item.codigo }</TableCell>
@@ -111,7 +112,7 @@ export default function Listar()
                                     <TableCell>{ item.data_cadastro.toDate().toLocaleString() }</TableCell>
                                     <TableCell>
                                         <IconButton onClick={ () => { deletar(item.id)}}> <DeleteIcon /> </IconButton>
-                                        <IconButton href='/imoveis/editar/abc123'><EditIcon /></IconButton>
+                                        <IconButton href={link}><EditIcon /></IconButton>
                                     </TableCell>
                                 </TableRow>
                                 )
